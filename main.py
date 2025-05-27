@@ -17,10 +17,10 @@ app = FastAPI(
 # Configuração de CORS (Cross-Origin Resource Sharing) para permitir chamadas da Wiki e localhost
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://suporte.intelbras.com.br", "http://localhost:5500", "*"],  # Origens permitidas
-    allow_credentials=True,        # Permitir credenciais (cookies, headers de autorização)
-    allow_methods=["*"],          # Métodos HTTP permitidos
-    allow_headers=["*"],          # Cabeçalhos permitidos
+    allow_origins=["*"],            # Permite todas as origens
+    allow_credentials=False,        # Deve ser False se usar "*"
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Define o formato do corpo da requisição de scraping, contendo apenas uma URL válida
