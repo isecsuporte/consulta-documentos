@@ -100,25 +100,16 @@ def fallback_extract(soup: BeautifulSoup, keyword: str) -> List[Document]:
 def scrape_documents(request: ScrapeRequest) -> ScrapeResponse:
     soup = fetch_html(request.url)
 
-    # DEBUG: mostrar o HTML retornado
-    print(soup.prettify())
-
-    manuals = extract_section_documents(soup, 'manuais')
-    datasheets = extract_section_documents(soup, 'ficha-tecnica')
-    #tutorials = extract_section_documents(soup, 'tutoriais-pdf')
-
-    if not manuals:
-        manuals = fallback_extract(soup, 'manual')
-    if not datasheets:
-        datasheets = fallback_extract(soup, 'datasheet')
-    #if not tutorials:
-    #    tutorials = fallback_extract(soup, 'tutorial')
+    manuals = fallback_extract(soup, 'manual')
+    datasheets = fallback_extract(soup, 'datasheet')
+    #tutorials = fallback_extract(soup, 'tutorial')
 
     return ScrapeResponse(
         manuals=manuals or None,
         datasheets=datasheets or None,
         #tutorials=tutorials or None
     )
+
 
 # Rodar localmente com:
 # uvicorn main:app --reload --host 0.0.0.0 --port 8000
