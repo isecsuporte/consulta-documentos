@@ -100,6 +100,9 @@ def fallback_extract(soup: BeautifulSoup, keyword: str) -> List[Document]:
 def scrape_documents(request: ScrapeRequest) -> ScrapeResponse:
     soup = fetch_html(request.url)
 
+    # DEBUG: mostrar o HTML retornado
+    print(soup.prettify())
+
     manuals = extract_section_documents(soup, 'manuais')
     datasheets = extract_section_documents(soup, 'ficha-tecnica')
     #tutorials = extract_section_documents(soup, 'tutoriais-pdf')
